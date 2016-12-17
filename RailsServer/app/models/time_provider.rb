@@ -1,0 +1,2 @@
+class TimeProvider < ApplicationRecord
+end

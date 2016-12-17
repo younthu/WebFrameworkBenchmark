@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stamp: MyString
+  short_string: MyString
+
+two:
+  stamp: MyString
+  short_string: MyString
