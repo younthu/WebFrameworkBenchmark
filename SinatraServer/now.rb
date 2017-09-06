@@ -1,5 +1,9 @@
 require 'sinatra'
 
-get '/now' do
+get '/' do
 	DateTime.now
+end
+
+get '/io' do
+  sleep(0.7)
 end

@@ -8,6 +8,11 @@ class TimeProvidersController < ApplicationController
     render json: @time_providers
   end
 
+  def io
+    sleep(0.7)
+    render json: "hello word!"
+  end
+
   def now
     render json: DateTime.now
   end
