@@ -17,20 +17,28 @@ ab是apache bench的简称
 没有io，纯烧CPU，谁框架轻量级，语言执行速度快，谁响应就快。下面分别是NodeJs, expressjs, sinatra, rails 的响应速度. 可以看出sinatra最快, node js其次, rails 非常慢。
 
 ```
-ab -n 10000 -c 100 http://localhost:8888/  # 累计10000个请求，100路并发, 单机测试结果[Node js   ]:  1447.44 [#/sec] (mean)
-ab -n 10000 -c 100 http://localhost:4000/  # 累计10000个请求，100路并发, 单机测试结果[expressjs ]:  526.76 [#/sec] (mean)
-ab -n 10000 -c 100 http://localhost:4567/  # 累计10000个请求，100路并发, 单机测试结果[sinatra   ]:  2348.28 [#/sec] (mean)
-ab -n 10000 -c 100 http://localhost:3000/  # 累计10000个请求，100路并发, 单机测试结果[rails     ]:  29.08 [#/sec] (mean)
+# 若无特殊说明，一下均为累计30000个请求，3000路并发, 单机测试结果
+ab -n 30000 -c 3000 http://localhost:8888/  #[   Node js]:  3154.61 [#/sec] (mean)
+ab -n 30000 -c 2000 http://localhost:4000/  #[ expressjs]:   450.66 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:4567/  #[   sinatra]:  2348.28 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:3000/  #[     rails]:    29.08 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:8080/  #[    golang]: unstable [#/sec] (mean), 最高的时候平均每秒可达14000，测两次以后就经常假死，基本在400请求左右。
 ```
 
 ## IO测试
 模拟700毫秒网络IO情况. 下面分别是NodeJs, expressjs, sinatra, rails 的响应速度. nodejs最快的，expressjs略慢。sinatra和rails慢了不止一个数量级。
 
 ~~~
-ab -n 10000 -c 100 http://localhost:8888/io  # 累计10000个请求，100路并发, 单机测试结果[Node js   ]:   140.26 [#/sec] (mean)
-ab -n 10000 -c 100 http://localhost:4000/io  # 累计10000个请求，100路并发, 单机测试结果[expressjs ]:   138.20 [#/sec] (mean)
-ab -n 10000 -c 100 http://localhost:4567/io  # 累计10000个请求，100路并发, 单机测试结果[sinatra   ]:    22.71 [#/sec] (mean)
-ab -n 10000 -c 100 http://localhost:3000/io  # 累计10000个请求，100路并发, 单机测试结果[rails     ]:     7.07 [#/sec] (mean)
+# 若无特殊说明，一下均为累计30000个请求，3000路并发, 单机测试结果
+ab -n 30000 -c 3000 http://localhost:8888/io  #[   Node js]:   2741.15 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:4000/io  #[ expressjs]:   1553.08 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:4567/io  #[   sinatra]:    22.71 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:3000/io  #[     rails]:     7.07 [#/sec] (mean)
+ab -n 30000 -c 3000 http://localhost:8080/io  #[    golang]:     141.53 [#/sec] (mean)
 ~~~
+
+# Roadmap
+1. 接下来会加入python框架的测试
+2. 还有C的测试
 
 
