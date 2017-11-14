@@ -6,6 +6,13 @@
 
 ab是apache bench的简称. 因为mac下文件句柄(FD)数量限制, 无法用ab模拟高并发测试，所以一下所有测试均是在ubuntu docker下完成。
 
+在docker里面测试过程中，容易遇到因为服务器日志太多，结果让ab中途退出的情况。所以，一般建议启动服务器的时候用nohup启动，日志不会打印到terminal
+
+~~~
+PORT=4567 nohup ruby now.rb & # 启动sinatra 服务器
+nohup npm start & #启动express js
+~~~
+
 ## 无IO测试
 没有io，纯烧CPU，谁框架轻量级，语言执行速度快，谁响应就快。下面分别是NodeJs, expressjs, sinatra, rails 的响应速度. 可以看出golang > node js > sinatra, rails 非常慢。
 
