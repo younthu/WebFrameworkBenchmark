@@ -1,0 +1,23 @@
+version: "3"
+services:
+  go:
+    build: 
+      context: ./
+      dockerfile: ./go_docker
+    ports:
+      - 8080:8080
+  node:
+    image: "node:13"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./NodeServer:/home/node/app
+    expose:
+      - "8088"
+    ports:
+      - 8088:8088
+    command: "node now.js"
+
+
